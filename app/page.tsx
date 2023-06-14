@@ -13,10 +13,10 @@ export default function Home() {
       
     </main>
         
-    <div className='text-center text-xs mt-[25%] text-gray-500' >
+    <footer className='text-center text-xs mt-[25%] text-gray-500' >
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
         Coded by <a href="https://tusharthe.vercel.app/" target="_blank">Tushar Biswas</a>.
-      </div>
+      </footer>
         </>
   )
 }
