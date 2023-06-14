@@ -26,8 +26,6 @@ export default function AgeForm() {
     });
 
     const [errors, setErrors] = useState<string[]>([]);
-    
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -42,7 +40,8 @@ export default function AgeForm() {
         e.preventDefault();
 
         // validate the form
-        const isValid = validateForm(formValues); 
+        const { isValid, errors } = validateForm(formValues);
+
         if (isValid) {
             // form submit logic 
             const today = new Date();
@@ -62,43 +61,51 @@ export default function AgeForm() {
             );
             console.log(`You are ${diffInYears} years, ${diffInMonths} months, and ${diffInDays} days old`);
             setAge({ years: diffInYears, months: diffInMonths, days: diffInDays });
+
+            setErrors([]);
+        }
+        else {
+            setErrors(errors);
         }
     };
 
-    const validateForm = (values: FormValues): boolean => {
+    const validateForm = (values: FormValues) => {
+        const errors: string[] = [];
         // check if any field is empty
         if (!values.date || !values.month || !values.year) {
-            console.error('All fields are required');
-            return false;
+            errors.push('All fields are required');            
+            return { isValid: false, errors };
+
         }
         // check if the day is between 1-31
         const day = Number(values.date);
         if (day < 1 || day > 31) {
-            console.error('Day must be between 1-31');
-            return false;
+            errors.push('Day must be between 1-31');
+
         }
         // check if the month is between 1-12
         const month = Number(values.month);
         if (month < 1 || month > 12) {
-            console.error('Month must be between 1-12');
-            return false;
+            errors.push('Month must be between 1-12');
+
         }
         // check if the year is in the future
         const year = Number(values.year);
         const currentYear = new Date().getFullYear();
         if (year > currentYear) {
-            console.error('Year cannot be in the future');
-            return false;
+            errors.push('Year cannot be in the future');
+
         }
         // check if the date is valid
         const isValidDate = (d: number, m: number, y: number) =>
             m > 0 && m <= 12 && d > 0 && d <= new Date(y, m, 0).getDate();
         if (!isValidDate(day, month, year)) {
-            console.error('The date is invalid');
-            return false;
+            errors.push('The date is invalid');
+
         }
         // if all checks passed, the form is valid
-        return true;
+        const isValid = errors.length === 0;
+        return { isValid, errors };
     };
 
 
@@ -108,16 +115,16 @@ export default function AgeForm() {
                 <section id="input" className='flex justify-between'>
 
                     <div>
-                        <label htmlFor="date" 
-                        className='w-[80%] block mx-auto font-semibold text-SmokeyGrey'>DAY</label>
+                        <label htmlFor="date"
+                            className='w-[80%] block mx-auto font-semibold text-SmokeyGrey'>DAY</label>
                         <input
                             placeholder='DD'
                             id="date"
                             name="date"
                             onChange={handleChange}
-                            className='w-[80%] block mx-auto rounded-md font-bold text-OffBlack p-4'
+                            className='w-[80%] block mx-auto rounded-md font-semibold text-OffBlack p-2'
                         />
-                        <span></span>
+
                     </div>
 
                     <div >
@@ -128,21 +135,31 @@ export default function AgeForm() {
                             id="month"
                             name="month"
                             onChange={handleChange}
-                            className='w-[80%] block mx-auto rounded-md font-bold text-OffBlack p-4'
+                            className='w-[80%] block mx-auto rounded-md font-semibold text-OffBlack p-2'
                         />
                     </div>
-                    
+
                     <div >
                         <label htmlFor="year" className='w-[80%] block mx-auto font-semibold text-SmokeyGrey'>YEAR</label>
                         <input
                             placeholder='YYYY'
-                            id="year"                            
+                            id="year"
                             name="year"
                             onChange={handleChange}
-                            className='w-[80%] block mx-auto rounded-md font-bold text-OffBlack p-4'
+                            className='w-[80%] block mx-auto rounded-md font-semibold text-OffBlack p-2'
                         />
                     </div>
                 </section>
+
+               <span>
+                {errors.length > 0 && (
+                    <ul className='block w-[80%] mx-auto text-center text-LightRed italic'>
+                        {errors.map((error, index) => {
+                            return <li key={index}>*{error}</li>;
+                        })}
+                    </ul>
+                )}
+                </span>
 
                 <button className="bg-Purple block rounded-full p-2 mx-auto my-[10%]">
                     <Image src={arrow} alt="arrow" />
@@ -153,9 +170,9 @@ export default function AgeForm() {
                 <p className='text-OffBlack font-extrabold text-3xl italic dark:text-Offwhite'>
                     <span className='text-Purple mr-2'>{age.years}</span>years</p>
                 <p className='text-OffBlack font-extrabold text-3xl italic dark:text-Offwhite'>
-                   <span className='text-Purple mr-2'>{age.months}</span> months</p>
+                    <span className='text-Purple mr-2'>{age.months}</span> months</p>
                 <p className='text-OffBlack font-extrabold text-3xl italic dark:text-Offwhite'>
-                   <span className='text-Purple mr-2'>{age.days}</span> days</p>
+                    <span className='text-Purple mr-2'>{age.days}</span> days</p>
             </section>
         </>
     )
