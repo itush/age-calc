@@ -29,7 +29,7 @@ export default function AgeForm() {
     
 
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormValues((prevValues) => ({
             ...prevValues,
@@ -38,7 +38,7 @@ export default function AgeForm() {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         // validate the form
@@ -104,7 +104,7 @@ export default function AgeForm() {
 
     return (
         <>
-            <form >
+            <form onSubmit={handleSubmit} >
                 <section id="input" className='flex justify-between'>
 
                     <div>
@@ -144,7 +144,7 @@ export default function AgeForm() {
                     </div>
                 </section>
 
-                <button className="bg-Purple block rounded-full p-2 mx-auto my-[10%]" onClick={handleSubmit}>
+                <button className="bg-Purple block rounded-full p-2 mx-auto my-[10%]">
                     <Image src={arrow} alt="arrow" />
                 </button >
             </form>
