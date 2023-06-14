@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,12 +8,19 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      colors: {
+        Purple: "hsl(259, 100%, 65%)",
+        LightRed: "hsl(0, 100%, 67%)",
+        White: "hsl(0, 0%, 100%)",
+        Offwhite: "hsl(0, 0%, 94%)",
+        LightGrey: "hsl(0, 0%, 86%)",
+        SmokeyGrey: "hsl(0, 1%, 44%)",
+        OffBlack: "hsl(0, 0%, 8%)",
+
+      }
+
     },
   },
+
   plugins: [],
 }
