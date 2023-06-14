@@ -2,7 +2,12 @@
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 
-export default function ModeProvider({ children }) {
+
+interface ModeProviderProps {
+  children: React.ReactNode;
+}
+
+export default function ModeProvider({ children }: ModeProviderProps) {
     const [mounted, setMounted] = useState(false);
   
     useEffect(() => {
