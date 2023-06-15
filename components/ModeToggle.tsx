@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import { GiPlayerTime } from 'react-icons/gi';
-import Link from 'next/link';
 
 
 export default function ModeToggle() {
