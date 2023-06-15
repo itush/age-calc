@@ -16,7 +16,6 @@ module.exports = {
         LightGrey: "hsl(0, 0%, 86%)",
         SmokeyGrey: "hsl(0, 1%, 44%)",
         OffBlack: "hsl(0, 0%, 8%)",
-
       }
 
     },

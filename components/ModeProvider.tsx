@@ -1,7 +1,7 @@
 "use client";
+
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
-
 
 interface ModeProviderProps {
   children: React.ReactNode;
@@ -20,6 +20,3 @@ export default function ModeProvider({ children }: ModeProviderProps) {
   
     return <ThemeProvider attribute="class">{children}</ThemeProvider>;
   }
-
-  import React from 'react'
-  
